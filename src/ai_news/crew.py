@@ -18,11 +18,6 @@ class AiNews():
 	agents_config = 'config/agents.yaml'
 	tasks_config = 'config/tasks.yaml'
 
-	ollama_llm = LLM(
-		model='ollama/deepseek-r1',
-		base_url='http://localhost:11434'
-	)
-
 	# If you would like to add tools to your agents, you can learn more about it here:
 	# https://docs.crewai.com/concepts/agents#agent-tools
 	@agent
@@ -30,8 +25,7 @@ class AiNews():
 		return Agent(
 			config=self.agents_config['retrieve_news'],
 			tools=[SerperDevTool()],
-			verbose=True,
-			llm=self.ollama_llm
+			verbose=True
 		)
 
 	@agent
@@ -39,8 +33,7 @@ class AiNews():
 		return Agent(
 			config=self.agents_config['website_scraper'],
 			tools=[ScrapeWebsiteTool()],
-			verbose=True,
-			llm=self.ollama_llm
+			verbose=True
 		)
 
 	@agent
@@ -48,8 +41,7 @@ class AiNews():
 		return Agent(
 			config=self.agents_config['ai_news_writer'],
 			tools=[],
-			verbose=True,
-			llm=self.ollama_llm
+			verbose=True
 		)
 	
 	@agent
@@ -57,8 +49,7 @@ class AiNews():
 		return Agent(
 			config=self.agents_config['file_writer'],
 			tools=[FileWriterTool()],
-			verbose=True,
-			llm=self.ollama_llm
+			verbose=True
 		)
 
 	# To learn more about structured task outputs, 
